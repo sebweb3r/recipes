@@ -147,6 +147,18 @@
                                             </b-input-group>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <AdvancedTreeSelect
+                                                :initial_selection1="settings.search_keywords"
+                                                :options="facets.Keywords"
+                                                facet="keyword"
+                                                :placeholder="$t('Keywords')"
+                                                @change="settings.search_keywords = $event"
+                                                @load-children="loadChildren($event)"
+                                            />
+                                        </div>
+                                    </div>
 
                                     <!-- foods filter -->
                                     <div class="row">
@@ -290,6 +302,7 @@ import GenericMultiselect from "@/components/GenericMultiselect"
 import { Treeselect, LOAD_CHILDREN_OPTIONS } from "@riophae/vue-treeselect" //TODO: delete
 import "@riophae/vue-treeselect/dist/vue-treeselect.css" //TODO: delete
 import RecipeSwitcher from "@/components/Buttons/RecipeSwitcher"
+import AdvancedTreeSelect from "@/apps/RecipeSearchView/AdvancedTreeSelect"
 
 Vue.use(BootstrapVue)
 
@@ -299,7 +312,7 @@ let UI_COOKIE_NAME = "_uisearch_settings"
 export default {
     name: "RecipeSearchView",
     mixins: [ResolveUrlMixin, ApiMixin],
-    components: { GenericMultiselect, RecipeCard, Treeselect, RecipeSwitcher },
+    components: { GenericMultiselect, RecipeCard, Treeselect, RecipeSwitcher, AdvancedTreeSelect },
     data() {
         return {
             // this.Models and this.Actions inherited from ApiMixin
@@ -497,7 +510,6 @@ export default {
             this.search.pagination_page = page
             this.refreshData(false)
         },
-
         normalizer(node) {
             let count = node?.count ? " (" + node.count + ")" : ""
             return {
@@ -542,6 +554,7 @@ export default {
                 }
             }
         },
+        // TODO remove
         loadKeywordChildren({ action, parentNode, callback }) {
             if (action === LOAD_CHILDREN_OPTIONS) {
                 if (this.facets?.cache_key) {
