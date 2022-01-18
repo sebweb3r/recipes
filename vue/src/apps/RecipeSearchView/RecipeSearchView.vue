@@ -57,33 +57,50 @@
                                         </div>
                                     </div>
 
-                                    <b-popover target="id_settings_button" triggers="click" placement="bottom" :title="$t('Settings')">
-                                        <div>
-                                            <b-form-group v-bind:label="$t('Recently_Viewed')" label-for="popover-input-1" label-cols="6" class="mb-3">
-                                                <b-form-input type="number" v-model="ui.recently_viewed" id="popover-input-1" size="sm"></b-form-input>
-                                            </b-form-group>
+                                    <b-popover target="id_settings_button" triggers="click" placement="bottom">
+                                        <b-tabs content-class="mt-1" small>
+                                            <b-tab :title="$t('Settings')" active>
+                                                <b-form-group v-bind:label="$t('Recently_Viewed')" label-for="popover-input-1" label-cols="6" class="mb-3">
+                                                    <b-form-input type="number" v-model="ui.recently_viewed" id="popover-input-1" size="sm"></b-form-input>
+                                                </b-form-group>
 
-                                            <b-form-group v-bind:label="$t('Recipes_per_page')" label-for="popover-input-page-count" label-cols="6" class="mb-3">
-                                                <b-form-input type="number" v-model="ui.page_size" id="popover-input-page-count" size="sm"></b-form-input>
-                                            </b-form-group>
+                                                <b-form-group v-bind:label="$t('Recipes_per_page')" label-for="popover-input-page-count" label-cols="6" class="mb-3">
+                                                    <b-form-input type="number" v-model="ui.page_size" id="popover-input-page-count" size="sm"></b-form-input>
+                                                </b-form-group>
 
-                                            <b-form-group v-bind:label="$t('Meal_Plan')" label-for="popover-input-2" label-cols="6" class="mb-3">
-                                                <b-form-checkbox switch v-model="ui.show_meal_plan" id="popover-input-2" size="sm"></b-form-checkbox>
-                                            </b-form-group>
+                                                <b-form-group v-bind:label="$t('Meal_Plan')" label-for="popover-input-2" label-cols="6" class="mb-3">
+                                                    <b-form-checkbox switch v-model="ui.show_meal_plan" id="popover-input-2" size="sm"></b-form-checkbox>
+                                                </b-form-group>
 
-                                            <b-form-group v-if="ui.show_meal_plan" v-bind:label="$t('Meal_Plan_Days')" label-for="popover-input-5" label-cols="6" class="mb-3">
-                                                <b-form-input type="number" v-model="ui.meal_plan_days" id="popover-input-5" size="sm"></b-form-input>
-                                            </b-form-group>
+                                                <b-form-group v-if="ui.show_meal_plan" v-bind:label="$t('Meal_Plan_Days')" label-for="popover-input-5" label-cols="6" class="mb-3">
+                                                    <b-form-input type="number" v-model="ui.meal_plan_days" id="popover-input-5" size="sm"></b-form-input>
+                                                </b-form-group>
 
-                                            <b-form-group v-bind:label="$t('Sort_by_new')" label-for="popover-input-3" label-cols="6" class="mb-3">
-                                                <b-form-checkbox switch v-model="ui.sort_by_new" id="popover-input-3" size="sm"></b-form-checkbox>
-                                            </b-form-group>
-                                        </div>
-                                        <div class="row" style="margin-top: 1vh">
-                                            <div class="col-12">
-                                                <a :href="resolveDjangoUrl('view_settings') + '#search'">{{ $t("Search Settings") }}</a>
-                                            </div>
-                                        </div>
+                                                <b-form-group v-bind:label="$t('Sort_by_new')" label-for="popover-input-3" label-cols="6" class="mb-3">
+                                                    <b-form-checkbox switch v-model="ui.sort_by_new" id="popover-input-3" size="sm"></b-form-checkbox>
+                                                </b-form-group>
+                                                <div class="row" style="margin-top: 1vh">
+                                                    <div class="col-12">
+                                                        <a :href="resolveDjangoUrl('view_settings') + '#search'">{{ $t("Search Settings") }}</a>
+                                                    </div>
+                                                </div>
+                                            </b-tab>
+                                            <b-tab title="Expert Settings">
+                                                <b-form-group v-bind:label="$t('remember_search')" label-for="popover-rem-search" label-cols="6" class="mb-3">
+                                                    <b-form-checkbox switch v-model="ui.remember_search" id="popover-rem-search" size="sm"></b-form-checkbox>
+                                                </b-form-group>
+                                                <b-form-group v-if="ui.remember_search" v-bind:label="$t('remember_hours')" label-for="popover-input-rem-hours" label-cols="6" class="mb-3">
+                                                    <b-form-input type="number" v-model="ui.remember_hours" id="popover-rem-hours" size="sm"></b-form-input>
+                                                </b-form-group>
+                                                <b-form-group v-bind:label="$t('tree_select')" label-for="popover-input-treeselect" label-cols="6" class="mb-3">
+                                                    <b-form-checkbox switch v-model="ui.tree_select" id="popover-input-treeselect" size="sm"></b-form-checkbox>
+                                                </b-form-group>
+                                                <b-form-group v-if="debug" v-bind:label="$t('sql_debug')" label-for="popover-input-sqldebug" label-cols="6" class="mb-3">
+                                                    <b-form-checkbox switch v-model="ui.sql_debug" id="popover-input-sqldebug" size="sm"></b-form-checkbox>
+                                                </b-form-group>
+                                            </b-tab>
+                                        </b-tabs>
+
                                         <div class="row" style="margin-top: 1vh">
                                             <div class="col-12" style="text-align: right">
                                                 <b-button size="sm" variant="secondary" style="margin-right: 8px" @click="$root.$emit('bv::hide::popover')">{{ $t("Close") }} </b-button>
@@ -96,6 +113,7 @@
                                         <div class="col-12">
                                             <b-input-group class="mt-2">
                                                 <treeselect
+                                                    v-if="ui.tree_select"
                                                     v-model="search.search_keywords"
                                                     :options="facets.Keywords"
                                                     :load-options="loadKeywordChildren"
@@ -120,7 +138,7 @@
                                                 ></generic-multiselect>
                                                 <b-input-group-append>
                                                     <b-input-group-text>
-                                                        <b-form-checkbox v-model="search.search_keywords_or" name="check-button" @change="refreshData(false)" class="shadow-none" switch size="sm">
+                                                        <b-form-checkbox v-model="search.search_keywords_or" name="check-button" @change="refreshData(false)" class="shadow-none" switch>
                                                             <span class="text-uppercase" v-if="search.search_keywords_or">{{ $t("or") }}</span>
                                                             <span class="text-uppercase" v-else>{{ $t("and") }}</span>
                                                         </b-form-checkbox>
@@ -135,6 +153,7 @@
                                         <div class="col-12">
                                             <b-input-group class="mt-2">
                                                 <treeselect
+                                                    v-if="ui.tree_select"
                                                     v-model="search.search_foods"
                                                     :options="facets.Foods"
                                                     :load-options="loadFoodChildren"
@@ -346,7 +365,7 @@ export default {
                 this.ui = Object.assign({}, this.ui, this.$cookies.get(UI_COOKIE_NAME))
             }
             if (this.ui.remember_search && this.$cookies.isKey(SEARCH_COOKIE_NAME)) {
-                this.search = Object.assign({}, this.search, this.$cookies.get(SEARCH_COOKIE_NAME))
+                this.search = Object.assign({}, this.search, this.$cookies.get(SEARCH_COOKIE_NAME), `${this.ui.remember_hours}h`)
             }
             let urlParams = new URLSearchParams(window.location.search)
 
@@ -398,7 +417,13 @@ export default {
         "ui.recently_viewed": function () {
             this.refreshData(false)
         },
-        "ui.search_input": _debounce(function () {
+        "ui.tree_select": function () {
+            if (this.ui.tree_select && !this.facets?.Keywords && !this.facets?.Foods) {
+                console.log("i changed to true")
+                this.getFacets(this.facets?.hash)
+            }
+        },
+        "search.search_input": _debounce(function () {
             this.search.pagination_page = 1
             this.pagination_count = 0
             this.refreshData(false)
@@ -522,7 +547,6 @@ export default {
             }
             return this.genericGetAPI("api_get_facets", params).then((response) => {
                 this.facets = { ...this.facets, ...response.data.facets }
-                console.log(this.facets)
             })
         },
         showSQL: function () {
