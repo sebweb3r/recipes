@@ -287,5 +287,15 @@
     "sql_debug": "SQL Debug",
     "remember_search": "Remember Search",
     "remember_hours": "Hours to Remember",
-    "tree_select": "Use Tree Selection"
+    "tree_select": "Use Tree Selection",
+    "enable_expert": "Enable Export Mode",
+    "expert_mode": "Expert Mode",
+    "advanced": "Advanced",
+    "fields": "Fields",
+    "show_keywords": "Show Keywords",
+    "show_foods": "Show Foods",
+    "show_books": "Show Books",
+    "show_rating": "Show Rating",
+    "show_units": "Show Units",
+    "show_filters": "Show Filters"
 }
