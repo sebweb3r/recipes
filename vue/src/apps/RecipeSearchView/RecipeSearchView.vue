@@ -57,50 +57,33 @@
                                         </div>
                                     </div>
 
-                                    <b-popover target="id_settings_button" triggers="click" placement="bottom">
-                                        <b-tabs content-class="mt-1" small>
-                                            <b-tab :title="$t('Settings')" active>
-                                                <b-form-group v-bind:label="$t('Recently_Viewed')" label-for="popover-input-1" label-cols="6" class="mb-3">
-                                                    <b-form-input type="number" v-model="ui.recently_viewed" id="popover-input-1" size="sm"></b-form-input>
-                                                </b-form-group>
+                                    <b-popover target="id_settings_button" triggers="click" placement="bottom" :title="$t('Settings')">
+                                        <div>
+                                            <b-form-group v-bind:label="$t('Recently_Viewed')" label-for="popover-input-1" label-cols="6" class="mb-3">
+                                                <b-form-input type="number" v-model="ui.recently_viewed" id="popover-input-1" size="sm"></b-form-input>
+                                            </b-form-group>
 
-                                                <b-form-group v-bind:label="$t('Recipes_per_page')" label-for="popover-input-page-count" label-cols="6" class="mb-3">
-                                                    <b-form-input type="number" v-model="ui.page_size" id="popover-input-page-count" size="sm"></b-form-input>
-                                                </b-form-group>
+                                            <b-form-group v-bind:label="$t('Recipes_per_page')" label-for="popover-input-page-count" label-cols="6" class="mb-3">
+                                                <b-form-input type="number" v-model="ui.page_size" id="popover-input-page-count" size="sm"></b-form-input>
+                                            </b-form-group>
 
-                                                <b-form-group v-bind:label="$t('Meal_Plan')" label-for="popover-input-2" label-cols="6" class="mb-3">
-                                                    <b-form-checkbox switch v-model="ui.show_meal_plan" id="popover-input-2" size="sm"></b-form-checkbox>
-                                                </b-form-group>
+                                            <b-form-group v-bind:label="$t('Meal_Plan')" label-for="popover-input-2" label-cols="6" class="mb-3">
+                                                <b-form-checkbox switch v-model="ui.show_meal_plan" id="popover-input-2" size="sm"></b-form-checkbox>
+                                            </b-form-group>
 
-                                                <b-form-group v-if="ui.show_meal_plan" v-bind:label="$t('Meal_Plan_Days')" label-for="popover-input-5" label-cols="6" class="mb-3">
-                                                    <b-form-input type="number" v-model="ui.meal_plan_days" id="popover-input-5" size="sm"></b-form-input>
-                                                </b-form-group>
+                                            <b-form-group v-if="ui.show_meal_plan" v-bind:label="$t('Meal_Plan_Days')" label-for="popover-input-5" label-cols="6" class="mb-3">
+                                                <b-form-input type="number" v-model="ui.meal_plan_days" id="popover-input-5" size="sm"></b-form-input>
+                                            </b-form-group>
 
-                                                <b-form-group v-bind:label="$t('Sort_by_new')" label-for="popover-input-3" label-cols="6" class="mb-3">
-                                                    <b-form-checkbox switch v-model="ui.sort_by_new" id="popover-input-3" size="sm"></b-form-checkbox>
-                                                </b-form-group>
-                                                <div class="row" style="margin-top: 1vh">
-                                                    <div class="col-12">
-                                                        <a :href="resolveDjangoUrl('view_settings') + '#search'">{{ $t("Search Settings") }}</a>
-                                                    </div>
-                                                </div>
-                                            </b-tab>
-                                            <b-tab title="Expert Settings">
-                                                <b-form-group v-bind:label="$t('remember_search')" label-for="popover-rem-search" label-cols="6" class="mb-3">
-                                                    <b-form-checkbox switch v-model="ui.remember_search" id="popover-rem-search" size="sm"></b-form-checkbox>
-                                                </b-form-group>
-                                                <b-form-group v-if="ui.remember_search" v-bind:label="$t('remember_hours')" label-for="popover-input-rem-hours" label-cols="6" class="mb-3">
-                                                    <b-form-input type="number" v-model="ui.remember_hours" id="popover-rem-hours" size="sm"></b-form-input>
-                                                </b-form-group>
-                                                <b-form-group v-bind:label="$t('tree_select')" label-for="popover-input-treeselect" label-cols="6" class="mb-3">
-                                                    <b-form-checkbox switch v-model="ui.tree_select" id="popover-input-treeselect" size="sm"></b-form-checkbox>
-                                                </b-form-group>
-                                                <b-form-group v-if="debug" v-bind:label="$t('sql_debug')" label-for="popover-input-sqldebug" label-cols="6" class="mb-3">
-                                                    <b-form-checkbox switch v-model="ui.sql_debug" id="popover-input-sqldebug" size="sm"></b-form-checkbox>
-                                                </b-form-group>
-                                            </b-tab>
-                                        </b-tabs>
-
+                                            <b-form-group v-bind:label="$t('Sort_by_new')" label-for="popover-input-3" label-cols="6" class="mb-3">
+                                                <b-form-checkbox switch v-model="ui.sort_by_new" id="popover-input-3" size="sm"></b-form-checkbox>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="row" style="margin-top: 1vh">
+                                            <div class="col-12">
+                                                <a :href="resolveDjangoUrl('view_settings') + '#search'">{{ $t("Search Settings") }}</a>
+                                            </div>
+                                        </div>
                                         <div class="row" style="margin-top: 1vh">
                                             <div class="col-12" style="text-align: right">
                                                 <b-button size="sm" variant="secondary" style="margin-right: 8px" @click="$root.$emit('bv::hide::popover')">{{ $t("Close") }} </b-button>
@@ -113,7 +96,6 @@
                                         <div class="col-12">
                                             <b-input-group class="mt-2">
                                                 <treeselect
-                                                    v-if="ui.tree_select"
                                                     v-model="search.search_keywords"
                                                     :options="facets.Keywords"
                                                     :load-options="loadKeywordChildren"
@@ -138,7 +120,7 @@
                                                 ></generic-multiselect>
                                                 <b-input-group-append>
                                                     <b-input-group-text>
-                                                        <b-form-checkbox v-model="search.search_keywords_or" name="check-button" @change="refreshData(false)" class="shadow-none" switch>
+                                                        <b-form-checkbox v-model="search.search_keywords_or" name="check-button" @change="refreshData(false)" class="shadow-none" switch size="sm">
                                                             <span class="text-uppercase" v-if="search.search_keywords_or">{{ $t("or") }}</span>
                                                             <span class="text-uppercase" v-else>{{ $t("and") }}</span>
                                                         </b-form-checkbox>
@@ -147,25 +129,12 @@
                                             </b-input-group>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <AdvancedTreeSelect
-                                                :initial_selection1="settings.search_keywords"
-                                                :options="facets.Keywords"
-                                                facet="keyword"
-                                                :placeholder="$t('Keywords')"
-                                                @change="settings.search_keywords = $event"
-                                                @load-children="loadChildren($event)"
-                                            />
-                                        </div>
-                                    </div>
 
                                     <!-- foods filter -->
                                     <div class="row">
                                         <div class="col-12">
                                             <b-input-group class="mt-2">
                                                 <treeselect
-                                                    v-if="ui.tree_select"
                                                     v-model="search.search_foods"
                                                     :options="facets.Foods"
                                                     :load-options="loadFoodChildren"
@@ -302,7 +271,6 @@ import GenericMultiselect from "@/components/GenericMultiselect"
 import { Treeselect, LOAD_CHILDREN_OPTIONS } from "@riophae/vue-treeselect" //TODO: delete
 import "@riophae/vue-treeselect/dist/vue-treeselect.css" //TODO: delete
 import RecipeSwitcher from "@/components/Buttons/RecipeSwitcher"
-import AdvancedTreeSelect from "@/apps/RecipeSearchView/AdvancedTreeSelect"
 
 Vue.use(BootstrapVue)
 
@@ -312,7 +280,7 @@ let UI_COOKIE_NAME = "_uisearch_settings"
 export default {
     name: "RecipeSearchView",
     mixins: [ResolveUrlMixin, ApiMixin],
-    components: { GenericMultiselect, RecipeCard, Treeselect, RecipeSwitcher, AdvancedTreeSelect },
+    components: { GenericMultiselect, RecipeCard, Treeselect, RecipeSwitcher },
     data() {
         return {
             // this.Models and this.Actions inherited from ApiMixin
@@ -378,7 +346,7 @@ export default {
                 this.ui = Object.assign({}, this.ui, this.$cookies.get(UI_COOKIE_NAME))
             }
             if (this.ui.remember_search && this.$cookies.isKey(SEARCH_COOKIE_NAME)) {
-                this.search = Object.assign({}, this.search, this.$cookies.get(SEARCH_COOKIE_NAME), `${this.ui.remember_hours}h`)
+                this.search = Object.assign({}, this.search, this.$cookies.get(SEARCH_COOKIE_NAME))
             }
             let urlParams = new URLSearchParams(window.location.search)
 
@@ -430,12 +398,7 @@ export default {
         "ui.recently_viewed": function () {
             this.refreshData(false)
         },
-        "ui.tree_select": function () {
-            if (this.ui.tree_select && !this.facets?.Keywords && !this.facets?.Foods) {
-                this.getFacets(this.facets?.hash)
-            }
-        },
-        "search.search_input": _debounce(function () {
+        "ui.search_input": _debounce(function () {
             this.search.pagination_page = 1
             this.pagination_count = 0
             this.refreshData(false)
@@ -448,7 +411,26 @@ export default {
         // this.genericAPI inherited from ApiMixin
         refreshData: function (random) {
             this.random_search = random
-            let params = this.buildParams()
+            let params = {
+                query: this.search.search_input,
+                keywords: this.search.search_keywords,
+                foods: this.search.search_foods,
+                rating: this.search.search_ratings,
+                books: this.search.search_books.map(function (A) {
+                    return A["id"]
+                }),
+                keywordsOr: this.search.search_keywords_or,
+                foodsOr: this.search.search_foods_or,
+                booksOr: this.search.search_books_or,
+                internal: this.search.search_internal,
+                random: this.random_search,
+                _new: this.ui.sort_by_new,
+                page: this.search.pagination_page,
+                pageSize: this.search.page_size,
+            }
+            if (!this.searchFiltered) {
+                params.options = { query: { last_viewed: this.ui.recently_viewed } }
+            }
             this.genericAPI(this.Models.RECIPE, this.Actions.LIST, params)
                 .then((result) => {
                     window.scrollTo(0, 0)
@@ -456,7 +438,7 @@ export default {
 
                     this.facets = result.data.facets
                     this.recipes = this.removeDuplicates(result.data.results, (recipe) => recipe.id)
-                    if (!this.searchFiltered()) {
+                    if (!this.searchFiltered) {
                         // if meal plans are being shown - filter out any meal plan recipes from the recipe list
                         let mealPlans = []
                         this.meal_plans.forEach((x) => mealPlans.push(x.recipe.id))
@@ -540,10 +522,33 @@ export default {
             }
             return this.genericGetAPI("api_get_facets", params).then((response) => {
                 this.facets = { ...this.facets, ...response.data.facets }
+                console.log(this.facets)
             })
         },
         showSQL: function () {
-            let params = this.buildParams()
+            // TODO refactor this so that it isn't a total copy of refreshData
+            let params = {
+                query: this.search.search_input,
+                keywords: this.search.search_keywords,
+                foods: this.search.search_foods,
+                rating: this.search.search_ratings,
+                books: this.search.search_books.map(function (A) {
+                    return A["id"]
+                }),
+                keywordsOr: this.search.search_keywords_or,
+                foodsOr: this.search.search_foods_or,
+                booksOr: this.search.search_books_or,
+                internal: this.search.search_internal,
+                random: this.random_search,
+                _new: this.ui.sort_by_new,
+                page: this.search.pagination_page,
+                pageSize: this.ui.page_size,
+            }
+            if (!this.searchFiltered) {
+                params.options = { query: { last_viewed: this.ui.recently_viewed, debug: true } }
+            } else {
+                params.options = { query: { debug: true } }
+            }
             this.genericAPI(this.Models.RECIPE, this.Actions.LIST, params).then((result) => {})
         },
         // TODO refactor to combine with load KeywordChildren
@@ -562,44 +567,18 @@ export default {
                 }
             }
         },
-        buildParams: function () {
-            let params = {
-                query: this.search.search_input,
-                keywords: this.search.search_keywords.map(function (A) {
-                    return A?.["id"] ?? A
-                }),
-                foods: this.search.search_foods.map(function (A) {
-                    return A?.["id"] ?? A
-                }),
-                rating: this.search.search_ratings,
-                books: this.search.search_books.map(function (A) {
-                    return A["id"]
-                }),
-                keywordsOr: this.search.search_keywords_or,
-                foodsOr: this.search.search_foods_or,
-                booksOr: this.search.search_books_or,
-                internal: this.search.search_internal,
-                random: this.random_search,
-                _new: this.ui.sort_by_new,
-                page: this.search.pagination_page,
-                pageSize: this.ui.page_size,
-            }
-            if (!this.searchFiltered()) {
-                params.options = { query: { last_viewed: this.ui.recently_viewed } }
-            }
-            return params
-        },
         searchFiltered: function (ignore_string = false) {
             let filtered =
                 this.search?.search_keywords?.length === 0 &&
                 this.search?.search_foods?.length === 0 &&
                 this.search?.search_books?.length === 0 &&
+                // this.settings?.pagination_page === 1 &&
                 !this.random_search &&
                 this.search?.search_ratings === undefined
             if (ignore_string) {
-                return !filtered
+                return filtered
             } else {
-                return !filtered && this.search?.search_input !== ""
+                return filtered && this.search?.search_input === ""
             }
         },
     },
